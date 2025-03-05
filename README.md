@@ -15,4 +15,8 @@ A full-stack web application that allows users to browse and purchase tickets fo
 ```cmd
 git clone https://github.com/martrzeciak/event-flow.git
 ```
+
+## 📄 Documentation
+The API documentation is available through Scalar at: `https://localhost:5001/scalar/v1`
+
 // Todo: add readme
