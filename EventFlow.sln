@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35728.132 d17.12
+VisualStudioVersion = 17.12.35728.132
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventFlow.Domain", "src\EventFlow.Domain\EventFlow.Domain.csproj", "{D139A190-0398-4918-8F7D-AE4FD48313E8}"
 EndProject
@@ -12,6 +12,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventFlow.Persistence", "src\EventFlow.Persistence\EventFlow.Persistence.csproj", "{A891C17C-C2AA-4EC8-8AF7-4834B1AB9DE8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventFlow.API", "src\EventFlow.API\EventFlow.API.csproj", "{51A6C387-F1C3-4059-B9E2-E02B50AA37C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{9970C2C8-FD92-4B6F-AD3D-64BF18E82B17}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
