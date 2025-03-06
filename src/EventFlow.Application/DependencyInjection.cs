@@ -1,4 +1,5 @@
-﻿using Mapster;
+﻿using EventFlow.Application.Behaviors;
+using Mapster;
 using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -14,7 +15,13 @@ public static class DependencyInjection
         {
             // Register the handlers from the executing assembly
             cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+
+            cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
+            cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
         });
+
+        // FluentValidation
+        // services.AddValidatorsFromAssemblyContaining<>();
 
         // Mapster
         var config = TypeAdapterConfig.GlobalSettings;
