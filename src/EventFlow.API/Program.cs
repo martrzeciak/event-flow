@@ -26,6 +26,13 @@ builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
+// Configure CORS
+app.UseCors(builder => builder
+    .AllowCredentials()
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .WithOrigins("http://localhost:4200", "https://localhost:4200"));
+
 // Configure exception handlers
 app.UseExceptionHandler(options => { });
 
