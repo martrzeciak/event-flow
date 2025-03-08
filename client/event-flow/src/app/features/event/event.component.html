@@ -1,16 +1,12 @@
+
+@if (eventList) {
 <div class="flex flex-col gap-4">
     <div class="grid grid-cols-2 gap-6">
-        <app-event-item></app-event-item>
-        <app-event-item></app-event-item>
-        <app-event-item></app-event-item>
-        <app-event-item></app-event-item>
-        <app-event-item></app-event-item>
-        <app-event-item></app-event-item>
-        <app-event-item></app-event-item>
-        <app-event-item></app-event-item>
-        <app-event-item></app-event-item>
-        <app-event-item></app-event-item>
-        <app-event-item></app-event-item>
-        <app-event-item></app-event-item>
+        @for (event of eventList; track event.id) {
+            <app-event-item [event]="event"></app-event-item>
+        }
     </div>
 </div>
+} @else {
+    Not found
+}

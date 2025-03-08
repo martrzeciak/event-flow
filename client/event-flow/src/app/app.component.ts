@@ -11,20 +11,6 @@ import { Pagination } from './shared/models/pagination';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
-  private eventService = inject(EventService);
-  events?: Pagination<Event>;
+export class AppComponent {
   title = 'event-flow';
-
-
-  ngOnInit(): void {
-    this.getEvents();
-  }
-
-  getEvents() {
-    this.eventService.getEvents().subscribe({
-      next: response => console.log(response),
-      error: error => console.error(error)
-    })
-  }
 }

@@ -13,7 +13,7 @@ public class GetEventListQueryHandler(AppDbContext context)
     public async Task<Result<PagedList<EventQueryDto>>> Handle(GetEventListsQuery request,
         CancellationToken cancellationToken)
     {
-        var query = context.Events.AsNoTracking().ProjectToType<EventQueryDto>();
+        var query = context.Events.ProjectToType<EventQueryDto>();
 
         return Result.Success(await PagedList<EventQueryDto>
             .CreateAsync(query, request.Params.PageNumber, request.Params.PageSize));

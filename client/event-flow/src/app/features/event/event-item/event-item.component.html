@@ -1,4 +1,5 @@
-<a
+@if (event) {
+  <a
   href="#"
   class="flex items-center bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-gray-100 min-h-64"
 >
@@ -9,15 +10,12 @@
   />
   <div class="flex flex-col justify-between p-4">
     <h5 class="mb-2 text-2xl font-bold tracking-tight text-stone-900">
-      Linkin park
+      {{ event.name }}
     </h5>
     <p class="mb-3 font-normal text-gray-800">
-      LINKIN PARK emerged as an innovative musical force and are one of the
-      best-selling artists of the last twenty years. Their RIAA
-      Diamond-certified full-length debut, Hybrid Theory, stands out as the
-      “best selling debut of the 21st century,” while landmark sophomore album
-      Meteora bowed at No. 1 on the Billboard Top 200 before going 8x Platinum
-      in the U.S.
+      {{ event.description}}
     </p>
   </div>
 </a>
+}
+
