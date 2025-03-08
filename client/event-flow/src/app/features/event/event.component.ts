@@ -1,11 +1,17 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { EventItemComponent } from "./event-item/event-item.component";
-import { PaginatedResult, Pagination } from '../../shared/models/pagination';
 import { EventService } from '../../core/services/event.service';
 import { EventModel } from '../../shared/models/eventModel';
+import { EventParams } from '../../shared/models/eventParams';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Pagination } from '../../shared/models/pagination';
+
 @Component({
   selector: 'app-event',
-  imports: [EventItemComponent],
+  imports: [
+    MatPaginator,
+    EventItemComponent
+  ],
   templateUrl: './event.component.html',
   styleUrl: './event.component.scss'
 })
@@ -13,6 +19,9 @@ export class EventComponent implements OnInit {
   private eventService = inject(EventService);
   eventList?: EventModel[];
   eventObject?: EventModel;
+  eventParams = new EventParams();
+  pageSizeOptions = [4, 8, 16, 24];
+  pagination: Pagination | undefined;
   
   ngOnInit(): void {
     this.initializeEventComponent();
@@ -23,12 +32,18 @@ export class EventComponent implements OnInit {
   }
 
   getProducts() {
-    this.eventService.getEvents().subscribe({
+    this.eventService.getEvents(this.eventParams).subscribe({
       next: response => {
         this.eventList = response.result;
-        console.log(this.eventList)
+        this.pagination = response.pagination;
       },
       error: error => console.log(error)
     })
+  }
+
+  handlePageEvent(event: PageEvent) {
+    this.eventParams.pageNumber = event.pageIndex + 1;
+    this.eventParams.pageSize = event.pageSize;
+    this.getProducts();
   }
 }

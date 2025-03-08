@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment.development';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { EventModel } from '../../shared/models/eventModel';
 import { getPaginatedResult } from '../../shared/helpers/paginationHelper';
+import { EventParams } from '../../shared/models/eventParams';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,11 @@ export class EventService {
   private baseUrl: string = environment.apiUrl;
   private http = inject(HttpClient);
   
-  getEvents() {
+  getEvents(eventParams: EventParams) {
     let params = new HttpParams();
 
-    params = params.append('pageSize', 10);
-    params = params.append('pageNumber', 1);
+    params = params.append('pageSize', eventParams.pageSize);
+    params = params.append('pageNumber', eventParams.pageNumber);
 
     return getPaginatedResult<EventModel[]>(this.baseUrl + 'events', params, this.http);
   }
