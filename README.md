@@ -3,7 +3,7 @@ A full-stack web application that allows users to browse and purchase tickets fo
 
 ## 🛠️ Tech Stack
  - Backend: .NET 9.0 (Web API)
- - Frontend: Angular 19 with Material UI
+ - Frontend: Angular 19 with Angular Material
  - Caching: Redis
  - Payment processing: Stripe
  - Styling: Tailwind CSS
