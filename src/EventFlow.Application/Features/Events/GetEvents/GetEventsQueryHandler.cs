@@ -13,9 +13,21 @@ public class GetEventListQueryHandler(AppDbContext context)
     public async Task<Result<PagedList<EventQueryDto>>> Handle(GetEventListsQuery request,
         CancellationToken cancellationToken)
     {
-        var query = context.Events.ProjectToType<EventQueryDto>();
+        var query = context.Events
+            .OrderBy(x => x.Date)
+            .AsNoTracking()
+            .ProjectToType<EventQueryDto>();
+
+        query = request.EventParams.OrderBy switch
+        {
+            "date" => query.OrderBy(x => x.Date),
+            "dateDesc" => query.OrderByDescending(x => x.Date),
+            "name" => query.OrderBy(x => x.Name),
+            _ => query.OrderBy(x => x.Date)
+        };
 
         return Result.Success(await PagedList<EventQueryDto>
-            .CreateAsync(query, request.Params.PageNumber, request.Params.PageSize));
+            .CreateAsync(query, request.EventParams.PageNumber, 
+                request.EventParams.PageSize));
     }
 }
