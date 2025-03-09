@@ -7,4 +7,7 @@
     @if (control.hasError('email')) {
         <mat-error>Email is invalid</mat-error>
     }
+    @if (control.hasError('isMatching')) {
+        <mat-error>Password do not match</mat-error>
+    }
 </mat-form-field>

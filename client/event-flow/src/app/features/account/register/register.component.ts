@@ -3,6 +3,8 @@ import { TextInputComponent } from "../../../shared/components/text-input/text-i
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms'
 import { MatButton } from '@angular/material/button';
+import { AccountService } from '../../../core/services/account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -17,6 +19,8 @@ import { MatButton } from '@angular/material/button';
 export class RegisterComponent {
   private formBuilder = inject(FormBuilder);
   private snack = inject(SnackbarService);
+  private accountService = inject(AccountService);
+  private router = inject(Router);
   validationErrors?: string[];
 
   registerForm = this.formBuilder.group({

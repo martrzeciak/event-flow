@@ -47,7 +47,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-app.MapGroup("api").MapIdentityApi<User>();
+app.MapGroup("api/Account").MapIdentityApi<User>();
 
 try
 {

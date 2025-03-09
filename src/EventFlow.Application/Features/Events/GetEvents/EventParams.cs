@@ -4,5 +4,5 @@ namespace EventFlow.Application.Features.Events.GetEvents;
 
 public class EventParams : PagingParams
 {
-    public required string OrderBy { get; set; }
+    public string OrderBy { get; set; } = "date";
 }

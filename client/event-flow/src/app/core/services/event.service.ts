@@ -17,6 +17,7 @@ export class EventService {
 
     params = params.append('pageSize', eventParams.pageSize);
     params = params.append('pageNumber', eventParams.pageNumber);
+    params = params.append('orderBy', eventParams.orderBy);
 
     return getPaginatedResult<EventModel[]>(this.baseUrl + 'events', params, this.http);
   }

@@ -11,9 +11,9 @@ public class EventsController : BaseApiController
 {
     [AllowAnonymous]
     [HttpGet]
-    public async Task<ActionResult<PagedList<EventQueryDto>>> GetEvents([FromQuery] PagingParams pagingParams)
+    public async Task<ActionResult<PagedList<EventQueryDto>>> GetEvents([FromQuery] EventParams eventParams)
     {
-        return HandlePagedResult(await Mediator.Send(new GetEventListsQuery { Params = pagingParams }));
+        return HandlePagedResult(await Mediator.Send(new GetEventListsQuery { EventParams = eventParams }));
     }
 
     [AllowAnonymous]
