@@ -1,5 +1,6 @@
 ﻿using EventFlow.Application.Common;
 using EventFlow.Application.DTOs;
+using EventFlow.Application.Features.Events.GetCategoryList;
 using EventFlow.Application.Features.Events.GetEventDetails;
 using EventFlow.Application.Features.Events.GetEvents;
 using Microsoft.AspNetCore.Authorization;
@@ -21,5 +22,12 @@ public class EventsController : BaseApiController
     public async Task<ActionResult<EventQueryDto>> GetEventDetails(Guid id)
     {
         return HandleResult(await Mediator.Send(new GetEventDetailsQuery { Id = id }));
+    }
+
+    [AllowAnonymous]
+    [HttpGet("categories")]
+    public async Task<ActionResult<List<string>>> GetCategories()
+    {
+        return HandleResult(await Mediator.Send(new GetCategoryListQuery()));
     }
 }

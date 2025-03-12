@@ -1,6 +1,4 @@
-﻿using Bogus;
-using EventFlow.Domain.Entities;
-using EventFlow.Persistence.Data;
+﻿using EventFlow.Persistence.Data;
 
 public class DbInitializer
 {

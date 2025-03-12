@@ -14,9 +14,24 @@ public class GetEventListQueryHandler(AppDbContext context)
         CancellationToken cancellationToken)
     {
         var query = context.Events
-            .OrderBy(x => x.Date)
             .AsNoTracking()
             .ProjectToType<EventQueryDto>();
+
+        if (!string.IsNullOrEmpty(request.EventParams.Search))
+        {
+            query = query.Where(x => x.Name
+                .Contains(request.EventParams.Search.ToLower()));
+        }
+
+        if (!string.IsNullOrEmpty(request.EventParams.Categories))
+        {
+            var categories = request.EventParams.Categories
+                .Split(",", StringSplitOptions.RemoveEmptyEntries)
+                .Select(x => x.Trim())
+                .ToHashSet();
+
+            query = query.Where(x => x.Categories.Any(c => categories.Contains(c)));
+        }
 
         query = request.EventParams.OrderBy switch
         {

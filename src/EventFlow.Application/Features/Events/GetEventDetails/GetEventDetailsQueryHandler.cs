@@ -18,7 +18,7 @@ public class GetEventDetailsQueryHandler(AppDbContext context)
             .ProjectToType<EventQueryDto>()
             .FirstOrDefaultAsync(x => x.Id == request.Id);
 
-        if (query == null)
+        if (query is null)
             return Result.Failure<EventQueryDto>(EventErrors.NotFound(request.Id));
 
         return Result.Success(query);

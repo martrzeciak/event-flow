@@ -11,6 +11,7 @@ import { EventParams } from '../../shared/models/eventParams';
 export class EventService {
   private baseUrl: string = environment.apiUrl;
   private http = inject(HttpClient);
+  categories: string[] = [];
   
   getEvents(eventParams: EventParams) {
     let params = new HttpParams();
@@ -19,6 +20,22 @@ export class EventService {
     params = params.append('pageNumber', eventParams.pageNumber);
     params = params.append('orderBy', eventParams.orderBy);
 
+    if (eventParams.categories.length > 0) {
+      params = params.append('categories', eventParams.categories.join(','));
+    }
+
+    if (eventParams.search) {
+      params = params.append('search', eventParams.search);
+    }
+
     return getPaginatedResult<EventModel[]>(this.baseUrl + 'events', params, this.http);
+  }
+
+  getCategories() {
+    if (this.categories.length > 0) return;
+
+    return this.http.get<string[]>(this.baseUrl + 'events/categories').subscribe({
+      next: response => this.categories = response
+    })
   }
 }
