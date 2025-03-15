@@ -30,5 +30,13 @@ export class LoginComponent {
   });
 
   onSubmit() {
+    this.accountService.login(this.loginForm.value).subscribe({
+      next: () => {
+        console.log(this.loginForm.value)
+        this.accountService.getUserInfo().subscribe();
+        console.log(this.accountService.currentUser())
+        this.router.navigateByUrl('/');
+      }
+    })
   }
 }

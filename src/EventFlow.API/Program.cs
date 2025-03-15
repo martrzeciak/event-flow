@@ -4,6 +4,7 @@ using EventFlow.Domain.Entities;
 using EventFlow.Persistence;
 using EventFlow.Persistence.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
@@ -17,7 +18,9 @@ builder.Services.AddPersistence(builder.Configuration);
 
 builder.Services.AddControllers(opt =>
 {
-    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    var policy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
     opt.Filters.Add(new AuthorizeFilter(policy));
 });
 
@@ -47,15 +50,17 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-app.MapGroup("api/Account").MapIdentityApi<User>();
+app.MapGroup("api").MapIdentityApi<User>();
 
 try
 {
     using var scope = app.Services.CreateScope();
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<AppDbContext>();
+    var userManager = services.GetRequiredService<UserManager<User>>();
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
     await context.Database.MigrateAsync();
-    await DbInitializer.SeedData(context);
+    await DbInitializer.SeedData(context, userManager, roleManager);
 }
 catch (Exception ex)
 {

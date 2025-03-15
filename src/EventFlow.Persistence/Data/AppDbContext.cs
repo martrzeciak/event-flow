@@ -1,10 +1,12 @@
 ﻿using EventFlow.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace EventFlow.Persistence.Data;
 
-public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext(options)
+public class AppDbContext(DbContextOptions<AppDbContext> options) 
+    : IdentityDbContext<User, IdentityRole, string>(options)
 {
     public DbSet<Address> Addresses { get; set; }
     public DbSet<Event> Events { get; set; }

@@ -9,15 +9,19 @@ export class SnackbarService {
 
   error(message: string) {
     this.snackBar.open(message, 'Close', {
-      duration: 5000,
-      panelClass: ['snack-error']
+      duration: 6000,
+      panelClass: ['snack-error'],
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
     })
   }
 
   success(message: string) {
     this.snackBar.open(message, 'Close', {
       duration: 5000,
-      panelClass: ['snack-success']
+      panelClass: ['snack-success'],
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
     })
   }
 }

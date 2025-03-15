@@ -20,7 +20,8 @@ public class GetEventListQueryHandler(AppDbContext context)
         if (!string.IsNullOrEmpty(request.EventParams.Search))
         {
             query = query.Where(x => x.Name
-                .Contains(request.EventParams.Search.ToLower()));
+                .Contains(request.EventParams.Search, 
+                    StringComparison.CurrentCultureIgnoreCase));
         }
 
         if (!string.IsNullOrEmpty(request.EventParams.Categories))
