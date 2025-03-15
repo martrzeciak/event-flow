@@ -6,6 +6,7 @@ import { MatIcon } from '@angular/material/icon';
 import { DatePipe } from '@angular/common';
 import { AddressPipe } from '../../../shared/pipes/address.pipe';
 import { MatButtonModule } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-event-item',
   imports: [
@@ -14,11 +15,13 @@ import { MatButtonModule } from '@angular/material/button';
     MatIcon,
     DatePipe,
     AddressPipe,
-    MatButtonModule
+    MatButtonModule,
+    RouterLink
   ],
   templateUrl: './event-item.component.html',
   styleUrl: './event-item.component.scss'
 })
 export class EventItemComponent {
   @Input() event?: EventModel;
+
 }

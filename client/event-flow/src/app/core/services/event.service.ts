@@ -31,6 +31,10 @@ export class EventService {
     return getPaginatedResult<EventModel[]>(this.baseUrl + 'events', params, this.http);
   }
 
+  getEvent(id: string) {
+    return this.http.get<EventModel>(this.baseUrl + 'events/' +id);
+  }
+
   getCategories() {
     if (this.categories.length > 0) return;
 

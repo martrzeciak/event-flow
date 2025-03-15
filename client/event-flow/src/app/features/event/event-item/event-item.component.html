@@ -28,13 +28,14 @@
     </div>
     <div class="flex items-start mb-3">
       <mat-icon class="mr-1">room</mat-icon>{{ event.venue.name }}
+      <mat-icon class="mx-1">person</mat-icon>Capacity: {{ event.venue.capacity }}
     </div>
     <div class="flex items-start mb-6">
       <mat-icon class="mr-1">map</mat-icon>{{ event.venue.address | address }}
     </div>
     <div class="flex items-center">
       Tickets starting at: 49 USD
-      <a mat-stroked-button class="ml-4" href="https://www.google.com/" target="_blank">Buy</a>
+      <a mat-stroked-button class="ml-4" routerLink="/event/{{event.id}}">Buy</a>
     </div>
   </div>
 </a>

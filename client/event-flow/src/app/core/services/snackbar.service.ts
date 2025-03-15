@@ -12,7 +12,7 @@ export class SnackbarService {
       duration: 6000,
       panelClass: ['snack-error'],
       horizontalPosition: 'center',
-      verticalPosition: 'top'
+      verticalPosition: "bottom"
     })
   }
 
@@ -21,7 +21,7 @@ export class SnackbarService {
       duration: 5000,
       panelClass: ['snack-success'],
       horizontalPosition: 'center',
-      verticalPosition: 'top'
+      verticalPosition: 'bottom'
     })
   }
 }

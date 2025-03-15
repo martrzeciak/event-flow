@@ -8,4 +8,5 @@ export type EventModel = {
     categories: string[];
     description: string;
     venue: Venue;
+    organizers: EventOrganizer[];
 }
