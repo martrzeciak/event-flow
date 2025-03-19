@@ -33,9 +33,9 @@
     <div class="flex items-start mb-6">
       <mat-icon class="mr-1">map</mat-icon>{{ event.venue.address | address }}
     </div>
-    <div class="flex items-center">
-      Tickets starting at: 49 USD
-      <a mat-stroked-button class="ml-4" routerLink="/event/{{event.id}}">Buy</a>
+    <div class="flex items-center font-semibold ">
+      Tickets starting at: {{ event.tickets | minTicketPrice | currency: 'USD'}}
+      <a mat-stroked-button class="ml-2" routerLink="/event/{{event.id}}">Buy</a>
     </div>
   </div>
 </a>

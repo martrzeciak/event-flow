@@ -3,12 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { EventModel } from '../../../shared/models/eventModel';
 import { EventService } from '../../../core/services/event.service';
 import { MatDivider } from '@angular/material/divider';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 import { MatInput } from '@angular/material/input';
-import { DatePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { AddressPipe } from '../../../shared/pipes/address.pipe';
+import { MinTicketPricePipe } from '../../../shared/pipes/min-ticket-price.pipe';
 
 @Component({
   selector: 'app-event-details',
@@ -20,7 +21,10 @@ import { AddressPipe } from '../../../shared/pipes/address.pipe';
     MatButton,
     MatInput,
     DatePipe,
-    AddressPipe
+    AddressPipe,
+    MatHint,
+    MinTicketPricePipe,
+    CurrencyPipe
   ],
   templateUrl: './event-details.component.html',
   styleUrl: './event-details.component.scss'

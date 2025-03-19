@@ -20,7 +20,7 @@ public static class DataGenerator
     {
         var jsonString = File.ReadAllText("./../EventFlow.Persistence/Data/SeedData/music_categories.json");
 
-        return JsonSerializer.Deserialize<ICollection<CategoryJson>>(jsonString, 
+        return JsonSerializer.Deserialize<ICollection<CategoryJson>>(jsonString,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
     }
 
@@ -43,7 +43,7 @@ public static class DataGenerator
     public static Faker<Venue> VenueFaker { get; } = new Faker<Venue>()
         .RuleFor(v => v.Id, f => Guid.NewGuid())
         .RuleFor(v => v.Name, f => f.Company.CompanyName())
-        .RuleFor(v => v.Capacity, f => f.Random.Int(100, 10000))
+        .RuleFor(v => v.Capacity, f => f.Random.Int(1, 100) * 100)
         .RuleFor(v => v.Address, f => AddressFaker.Generate());
 
     public static Faker<EventOrganizer> OrganizerFaker { get; } = new Faker<EventOrganizer>()
@@ -58,5 +58,39 @@ public static class DataGenerator
         .RuleFor(e => e.Description, f => f.Lorem.Paragraph())
         .RuleFor(e => e.Categories, f => f.PickRandom(categories_, 2).Select(c => c.Name).ToList())
         .RuleFor(e => e.Venue, f => VenueFaker.Generate())
-        .RuleFor(e => e.Organizers, f => new List<EventOrganizer> { OrganizerFaker.Generate() });
+        .RuleFor(e => e.Organizers, f => new List<EventOrganizer> { OrganizerFaker.Generate() })
+        .RuleFor(e => e.Tickets, (f, e) =>
+        {
+            int venueCapacity = e.Venue.Capacity;
+            int vipTickets = Math.Max(1, (int)(venueCapacity * 0.05));
+            int standardTickets = venueCapacity - vipTickets;
+
+            var tickets = new List<Ticket>();
+
+            if (vipTickets > 0)
+            {
+                tickets.Add(new Ticket
+                {
+                    Id = Guid.NewGuid(),
+                    Price = f.Random.Decimal(100, 200),
+                    TicketType = TicketType.VIP,
+                    TicketsAvailable = vipTickets,
+                    EventId = e.Id
+                });
+            }
+
+            if (standardTickets > 0)
+            {
+                tickets.Add(new Ticket
+                {
+                    Id = Guid.NewGuid(),
+                    Price = f.Random.Decimal(50, 100),
+                    TicketType = TicketType.Standard,
+                    TicketsAvailable = standardTickets,
+                    EventId = e.Id
+                });
+            }
+
+            return tickets;
+        });
 }

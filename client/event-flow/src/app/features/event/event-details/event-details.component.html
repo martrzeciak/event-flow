@@ -2,7 +2,6 @@
     <section class="pt-8 text-fuchsia-300">
       <div class="max-w-screen-2xl px-4 mx-auto">
         <div class="grid grid-cols-2 gap-8">
-          <!-- Event Image -->
           <div class="max-w-xl mx-auto">
             <img
               class="w-full rounded-lg"
@@ -11,31 +10,27 @@
             />
           </div>
   
-          <!-- Event Details -->
           <div>
             <h1 class="text-2xl font-semibold">{{ event.name }}</h1>
   
-            <!-- Event Price -->
             <div class="mt-4 flex items-center gap-4">
-              <p class="text-3xl font-extrabold">49 USD</p>
+              <p class="text-3xl font-extrabold">{{ event.tickets | minTicketPrice | currency: 'USD' }}</p>
             </div>
   
-            <!-- Add to Cart and Quantity -->
             <div class="flex items-center gap-4 mt-6">
               <button mat-flat-button>
                 <mat-icon>shopping_cart</mat-icon>
-                Add to cart
               </button>
   
               <mat-form-field appearance="outline">
                 <mat-label>Quantity</mat-label>
-                <input matInput min="0" type="number" />
+                <input matInput min="0" step="1" type="number" />
+                <mat-hint align="end">Tickets left: 999</mat-hint>
               </mat-form-field>
             </div>
   
             <mat-divider></mat-divider>
   
-            <!-- About Section -->
             <div class="my-6">
               <p class="text-2xl font-semibold">About</p>
               <p class="mt-2">{{ event.description }}</p>
@@ -43,7 +38,6 @@
   
             <mat-divider></mat-divider>
   
-            <!-- Localization Section -->
             <div class="my-6">
               <p class="text-2xl font-semibold">Localization</p>
               <div class="flex flex-col font-normal mt-6">
@@ -67,7 +61,6 @@
   
             <mat-divider></mat-divider>
   
-            <!-- Event Organizer Section -->
             <div class="mt-6">
               <p class="text-2xl font-semibold">Event organizer</p>
               @for (organizer of event.organizers; track organizer.id) {

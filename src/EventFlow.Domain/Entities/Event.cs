@@ -8,6 +8,7 @@ public class Event : BaseEntity
     public ICollection<string> Categories { get; set; } = [];
 
     public ICollection<EventOrganizer> Organizers { get; set; } = [];
+    public ICollection<Ticket> Tickets { get; set; } = [];
 
     public Guid VenueId { get; set; }
     public Venue Venue { get; set; } = null!;

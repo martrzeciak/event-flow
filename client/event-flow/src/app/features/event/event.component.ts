@@ -63,6 +63,7 @@ export class EventComponent implements OnInit {
       next: response => {
         this.eventList = response.result;
         this.pagination = response.pagination;
+        console.log(response.result)
       },
       error: error => console.log(error)
     })
@@ -84,7 +85,6 @@ export class EventComponent implements OnInit {
   }
 
   onSearchChange() {
-    console.log(this.eventParams.search)
     this.eventParams.pageNumber = 1;
     this.getEvents();
   }

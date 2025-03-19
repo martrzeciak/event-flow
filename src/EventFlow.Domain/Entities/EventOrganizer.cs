@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace EventFlow.Domain.Entities;
+﻿namespace EventFlow.Domain.Entities;
 
 public class EventOrganizer : BaseEntity
 {

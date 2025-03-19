@@ -1,4 +1,5 @@
 ﻿using EventFlow.Domain.Entities;
+using EventFlow.Persistence.Config;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -12,4 +13,12 @@ public class AppDbContext(DbContextOptions<AppDbContext> options)
     public DbSet<Event> Events { get; set; }
     public DbSet<EventOrganizer> EventOrganizers { get; set; }
     public DbSet<Venue> Venues { get; set; }
+    public DbSet<Ticket> Ticket { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(TicketConfiguration).Assembly);
+    }
 }
