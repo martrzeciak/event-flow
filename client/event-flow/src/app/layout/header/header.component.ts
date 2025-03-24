@@ -3,7 +3,6 @@ import { MatIcon } from '@angular/material/icon'
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatButton } from '@angular/material/button';
 import { AccountService } from '../../core/services/account.service';
-import { MatBadge } from '@angular/material/badge';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { MatDivider } from '@angular/material/divider';
 
@@ -13,7 +12,6 @@ import { MatDivider } from '@angular/material/divider';
   imports: [
     MatIcon,
     MatButton,
-    MatBadge,
     RouterLink,
     RouterLinkActive,
     MatMenuTrigger,

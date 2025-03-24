@@ -17,6 +17,9 @@ git clone https://github.com/martrzeciak/event-flow.git
 ```
 
 ## 📄 Documentation
-The API documentation is available through Scalar at: `https://localhost:5001/scalar/v1`
+The API documentation is available through Scalar at:
+```cmd
+https://localhost:5001/scalar/v1
+```
 
 // Todo: add readme

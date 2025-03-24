@@ -48,6 +48,7 @@ export class EventComponent implements OnInit {
     {name: 'Date: Oldest to Newest', value: 'dateDesc'},
     {name: 'Alphabetical', value: 'name'}
   ]
+  counter: number = 0;
   
   ngOnInit(): void {
     this.initializeEventComponent();
@@ -110,5 +111,17 @@ export class EventComponent implements OnInit {
   resetParams() {
     this.eventParams = new EventParams();
     this.getEvents();
+  }
+
+  incrementCounter() {
+    this.counter++;
+  }
+
+  decrementCounter() {
+    this.counter--;
+  }
+
+  resetCounter() {
+    this.counter = 0;
   }
 }

@@ -9,7 +9,6 @@ import { MatButton } from '@angular/material/button';
 import { MatInput } from '@angular/material/input';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { AddressPipe } from '../../../shared/pipes/address.pipe';
-import { MinTicketPricePipe } from '../../../shared/pipes/min-ticket-price.pipe';
 
 @Component({
   selector: 'app-event-details',
@@ -22,8 +21,6 @@ import { MinTicketPricePipe } from '../../../shared/pipes/min-ticket-price.pipe'
     MatInput,
     DatePipe,
     AddressPipe,
-    MatHint,
-    MinTicketPricePipe,
     CurrencyPipe
   ],
   templateUrl: './event-details.component.html',
@@ -45,6 +42,7 @@ export class EventDetailsComponent implements OnInit {
     this.eventService.getEvent(id).subscribe({
       next: response => {
         this.event = response;
+        console.log(response)
       },
       error: error => console.log(error)
     })

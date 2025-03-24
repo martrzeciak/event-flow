@@ -1,6 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace EventFlow.Application.Common;
+﻿namespace EventFlow.Application.Common;
 
 public class Result
 {
