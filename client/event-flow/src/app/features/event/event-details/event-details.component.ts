@@ -9,6 +9,7 @@ import { MatButton } from '@angular/material/button';
 import { MatInput } from '@angular/material/input';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { AddressPipe } from '../../../shared/pipes/address.pipe';
+import { EmptyStateComponent } from "../../../shared/components/empty-state/empty-state.component";
 
 @Component({
   selector: 'app-event-details',
@@ -21,8 +22,9 @@ import { AddressPipe } from '../../../shared/pipes/address.pipe';
     MatInput,
     DatePipe,
     AddressPipe,
-    CurrencyPipe
-  ],
+    CurrencyPipe,
+    EmptyStateComponent
+],
   templateUrl: './event-details.component.html',
   styleUrl: './event-details.component.scss'
 })

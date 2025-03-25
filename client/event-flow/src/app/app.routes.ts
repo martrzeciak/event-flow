@@ -6,10 +6,12 @@ import { NotFoundComponent } from './shared/components/not-found/not-found.compo
 import { ServerErrorComponent } from './shared/components/server-error/server-error.component';
 import { EventDetailsComponent } from './features/event/event-details/event-details.component';
 import { TestErrorComponent } from './shared/components/test-error/test-error.component';
+import { CartComponent } from './features/cart/cart.component';
 
 export const routes: Routes = [
     {path: '', component: EventComponent},
     {path: 'event/:id', component: EventDetailsComponent},
+    {path: 'cart', component: CartComponent},
     {path: 'account/login', component: LoginComponent},
     {path: 'account/register', component: RegisterComponent},
     {path: 'test-error', component: TestErrorComponent},
