@@ -1,6 +1,6 @@
 ﻿using EventFlow.Application.Common;
 
-namespace EventFlow.Application.Features.Events.GetEvents;
+namespace EventFlow.Application.Features.Events.Queries.GetEventList;
 
 public class EventParams : PagingParams
 {

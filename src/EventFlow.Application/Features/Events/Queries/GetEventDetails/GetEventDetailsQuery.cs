@@ -1,7 +1,7 @@
 ﻿using EventFlow.Application.Abstractions.CQRS;
 using EventFlow.Application.DTOs;
 
-namespace EventFlow.Application.Features.Events.GetEventDetails;
+namespace EventFlow.Application.Features.Events.Queries.GetEventDetails;
 
 public class GetEventDetailsQuery : IQuery<EventQueryDto>
 {

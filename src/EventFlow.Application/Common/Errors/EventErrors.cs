@@ -2,9 +2,9 @@
 
 public static class EventErrors
 {
-    public static Error NotFound(Guid actorId) => new(
+    public static readonly Error NotFound = new(
         "404",
-        $"Event with ID {actorId} not found.");
+        "Event not found.");
 
     public static readonly Error CategoryNotFound = new(
         "404",

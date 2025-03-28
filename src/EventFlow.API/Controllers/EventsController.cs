@@ -1,8 +1,8 @@
 ﻿using EventFlow.Application.Common;
 using EventFlow.Application.DTOs;
-using EventFlow.Application.Features.Events.GetCategoryList;
-using EventFlow.Application.Features.Events.GetEventDetails;
-using EventFlow.Application.Features.Events.GetEvents;
+using EventFlow.Application.Features.Events.Queries.GetCategoryList;
+using EventFlow.Application.Features.Events.Queries.GetEventDetails;
+using EventFlow.Application.Features.Events.Queries.GetEventList;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,7 +14,7 @@ public class EventsController : BaseApiController
     [HttpGet]
     public async Task<ActionResult<PagedList<EventQueryDto>>> GetEvents([FromQuery] EventParams eventParams)
     {
-        return HandlePagedResult(await Mediator.Send(new GetEventListsQuery { EventParams = eventParams }));
+        return HandlePagedResult(await Mediator.Send(new GetEventListQuery { EventParams = eventParams }));
     }
 
     [AllowAnonymous]

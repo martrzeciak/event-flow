@@ -6,7 +6,7 @@ using EventFlow.Persistence.Data;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 
-namespace EventFlow.Application.Features.Events.GetEventDetails;
+namespace EventFlow.Application.Features.Events.Queries.GetEventDetails;
 
 public class GetEventDetailsQueryHandler(AppDbContext context)
     : IQueryHandler<GetEventDetailsQuery, EventQueryDto>
@@ -16,10 +16,10 @@ public class GetEventDetailsQueryHandler(AppDbContext context)
     {
         var query = await context.Events
             .ProjectToType<EventQueryDto>()
-            .FirstOrDefaultAsync(x => x.Id == request.Id);
+            .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
         if (query is null)
-            return Result.Failure<EventQueryDto>(EventErrors.NotFound(request.Id));
+            return Result.Failure<EventQueryDto>(EventErrors.NotFound);
 
         return Result.Success(query);
     }

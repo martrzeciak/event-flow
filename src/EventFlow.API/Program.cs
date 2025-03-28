@@ -3,6 +3,7 @@ using EventFlow.Application;
 using EventFlow.Domain.Entities;
 using EventFlow.Persistence;
 using EventFlow.Persistence.Data;
+using EventFlow.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -15,6 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApiServices(builder.Configuration);
 builder.Services.AddApplication();
 builder.Services.AddPersistence(builder.Configuration);
+builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddControllers(opt =>
 {
@@ -23,6 +25,8 @@ builder.Services.AddControllers(opt =>
         .Build();
     opt.Filters.Add(new AuthorizeFilter(policy));
 });
+
+builder.Services.AddCors();
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();

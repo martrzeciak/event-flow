@@ -4,7 +4,7 @@ using EventFlow.Application.Common.Errors;
 using EventFlow.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace EventFlow.Application.Features.Events.GetCategoryList;
+namespace EventFlow.Application.Features.Events.Queries.GetCategoryList;
 
 public class GetCategoryListQueryHandler(AppDbContext context)
     : IQueryHandler<GetCategoryListQuery, List<string>>
@@ -17,7 +17,7 @@ public class GetCategoryListQueryHandler(AppDbContext context)
             .SelectMany(x => x.Categories)
             .Distinct()
             .OrderBy(x => x)
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
 
         if (categories is null)
             return Result.Failure<List<string>>(EventErrors.CategoryNotFound);

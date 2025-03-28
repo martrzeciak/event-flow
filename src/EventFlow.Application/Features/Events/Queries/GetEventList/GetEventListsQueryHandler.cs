@@ -5,12 +5,12 @@ using EventFlow.Persistence.Data;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 
-namespace EventFlow.Application.Features.Events.GetEvents;
+namespace EventFlow.Application.Features.Events.Queries.GetEventList;
 
 public class GetEventListQueryHandler(AppDbContext context)
-    : IQueryHandler<GetEventListsQuery, PagedList<EventQueryDto>>
+    : IQueryHandler<GetEventListQuery, PagedList<EventQueryDto>>
 {
-    public async Task<Result<PagedList<EventQueryDto>>> Handle(GetEventListsQuery request,
+    public async Task<Result<PagedList<EventQueryDto>>> Handle(GetEventListQuery request,
         CancellationToken cancellationToken)
     {
         var query = context.Events

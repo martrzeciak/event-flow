@@ -11,6 +11,7 @@ public static class DependencyInjection
     public static IServiceCollection AddApiServices(this IServiceCollection services,
         IConfiguration configuration)
     {
+        // Add DbContext
         services.AddDbContext<AppDbContext>(options =>
         {
             options.UseSqlServer(configuration
