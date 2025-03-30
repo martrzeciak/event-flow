@@ -2,6 +2,13 @@
 @use '@angular/material' as mat;
 
 /* You can add global styles to this file, and also import other style files */
+:root {
+    @include mat.badge-overrides((
+      background-color: #161215,
+      text-color: #f4a8ff
+    ));
+}
+
 .container {
     @apply mx-auto max-w-screen-2xl
 }

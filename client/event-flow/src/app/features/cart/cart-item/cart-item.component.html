@@ -1,0 +1,42 @@
+<div class="rounded-lg p-4 shadow-sm mb-4 text-fuchsia-300" style="background-color: #161215">
+    <div class="flex items-center justify-between gap-6">
+        <div class="flex items-center justify-between order-3">
+            <div class="flex items-center align-middle gap-3">
+                <button mat-icon-button (click)="decrementQuantity()" class="mat-icon-button">
+                    <mat-icon>remove</mat-icon>
+                </button>
+
+                <div class="font-semibold text-xl mb-1">{{ item().quantity }}</div>
+
+                <button mat-icon-button (click)="incrementQuantity()"  class="mat-icon-button">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button mat-button (click)="removeItemFromCart()">
+                    <mat-icon>delete</mat-icon>
+                    Delete
+                </button>
+            </div>
+
+            <div class="text-end order-4 w-32">
+                <p class="font-bold text-xl">{{item().price | currency}}</p>
+            </div>
+        </div>
+
+        <div class="w-full flex space-y-4 max-w-md">
+
+            <div>
+                <a class="font-bold text-xl">
+                    {{ item().eventName }}
+                </a>
+                <p>
+                    {{ item().ticketType }} ticket
+                </p>
+            </div>
+            
+        </div>
+
+    </div>
+</div>

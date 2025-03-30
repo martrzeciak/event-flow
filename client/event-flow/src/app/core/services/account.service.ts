@@ -8,7 +8,7 @@ import { map } from 'rxjs';
   providedIn: 'root'
 })
 export class AccountService {
-  baseUrl = environment.apiUrl;
+  baseUrl: string = environment.apiUrl;
   private http = inject(HttpClient);
   currentUser = signal<User | null>(null);
   

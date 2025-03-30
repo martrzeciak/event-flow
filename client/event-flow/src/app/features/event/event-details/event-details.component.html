@@ -25,9 +25,13 @@
           </div>
 
           <div class="flex items-start gap-3 mt-2">
-            <button mat-flat-button>
-              <mat-icon>add_circle</mat-icon>
-              <p>Add</p>
+            <button
+              mat-flat-button
+              (click)="decrementQuantity(ticket.ticketType)"
+              [disabled]="selectedTicketQuantities[ticket.ticketType] <= 0"
+            >
+              <mat-icon>remove_circle</mat-icon>
+              <p>Remove</p>
             </button>
 
             <mat-form-field appearance="outline">
@@ -35,17 +39,37 @@
               <input
                 matInput
                 min="0"
+                [max]="ticket.ticketsAvailable"
                 step="1"
                 type="number"
-                placeholder="Quantity"
+                [(ngModel)]="selectedTicketQuantities[ticket.ticketType]"
               />
             </mat-form-field>
-            <button mat-flat-button>
-              <mat-icon>remove_circle</mat-icon>
-              <p>Remove</p>
+
+            <button
+              mat-flat-button
+              (click)="
+                incrementQuantity(ticket.ticketType, ticket.ticketsAvailable)
+              "
+              [disabled]="
+                selectedTicketQuantities[ticket.ticketType] >= ticket.ticketsAvailable
+              "
+            >
+              <mat-icon>add_circle</mat-icon>
+              <p>Add</p>
             </button>
 
-            <button class="ml-6" mat-flat-button>
+            <button
+              class="ml-6"
+              mat-flat-button
+              (click)="
+                updateCart(
+                  ticket,
+                  selectedTicketQuantities[ticket.ticketType],
+                  ticket.ticketsAvailable
+                )
+              "
+            >
               <mat-icon>add_shopping_cart</mat-icon>
               <p>Add to cart</p>
             </button>
