@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 
 EventFlow.API/appsettings.json
+src/EventFlow.API/appsettings.json
+/src/EventFlow.API/appsettings.json
