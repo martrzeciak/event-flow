@@ -20,7 +20,7 @@ public class GetCategoryListQueryHandler(AppDbContext context)
             .ToListAsync(cancellationToken);
 
         if (categories is null)
-            return Result.Failure<List<string>>(EventErrors.CategoryNotFound);
+            return Result.Failure<List<string>>(EventError.CategoryNotFound);
 
         return Result.Success(categories);
     }

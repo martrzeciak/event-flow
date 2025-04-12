@@ -19,7 +19,7 @@ public class GetEventDetailsQueryHandler(AppDbContext context)
             .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
         if (query is null)
-            return Result.Failure<EventQueryDto>(EventErrors.NotFound);
+            return Result.Failure<EventQueryDto>(EventError.NotFound);
 
         return Result.Success(query);
     }

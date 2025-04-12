@@ -15,7 +15,7 @@ public class CreateOrUpdatePaymentIntentCommandHandler(IPaymentService paymentSe
     {
         var cart = await paymentService.CreateOrUpdatePaymentIntent(request.CartId);
 
-        if (cart is null) return Result.Failure<ShoppingCartDto>(PaymentErrors.CartProblem);
+        if (cart is null) return Result.Failure<ShoppingCartDto>(PaymentError.CartProblem);
 
         return cart.Adapt<ShoppingCartDto>();
     }

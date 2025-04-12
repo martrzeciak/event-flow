@@ -1,4 +1,5 @@
 ﻿using EventFlow.Domain.Entities;
+using EventFlow.Domain.Entities.OrderAggregate;
 using EventFlow.Persistence.Config;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -14,6 +15,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options)
     public DbSet<EventOrganizer> EventOrganizers { get; set; }
     public DbSet<Venue> Venues { get; set; }
     public DbSet<Ticket> Ticket { get; set; }
+    public DbSet<Order> Orders{ get; set; }
+    public DbSet<OrderItem> OrderItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

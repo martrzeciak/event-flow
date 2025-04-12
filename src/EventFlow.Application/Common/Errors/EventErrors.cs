@@ -1,6 +1,6 @@
 ﻿namespace EventFlow.Application.Common.Errors;
 
-public static class EventErrors
+public static class EventError
 {
     public static readonly Error NotFound = new(
         "404",

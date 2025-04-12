@@ -25,6 +25,6 @@ public class CartController : BaseApiController
     [HttpDelete]
     public async Task<ActionResult> DeleteCart(string id)
     {
-        return HandleResult(await Mediator.Send(new DeleteCardCommand { Id = id }));
+        return HandleResult(await Mediator.Send(new DeleteCartCommand { Id = id }));
     }
 }

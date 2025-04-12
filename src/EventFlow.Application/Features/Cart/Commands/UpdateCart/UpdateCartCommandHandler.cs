@@ -19,7 +19,7 @@ public class UpdateCartCommandHandler(ICartService cartService)
         var updatedCart = await cartService.SetCartAsync(cart);
 
         if (updatedCart is null)
-            return Result.Failure<ShoppingCartDto>(CartErrors.UpdateFailed);
+            return Result.Failure<ShoppingCartDto>(CartError.UpdateFailed);
 
         var cartToReturn = updatedCart.Adapt<ShoppingCartDto>();
 

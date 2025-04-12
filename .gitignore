@@ -362,6 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-EventFlow.API/appsettings.json
-src/EventFlow.API/appsettings.json
 /src/EventFlow.API/appsettings.json

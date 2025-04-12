@@ -2,7 +2,7 @@
 
 namespace EventFlow.Application.Features.Cart.Commands.DeleteCart;
 
-public class DeleteCardCommand : ICommand
+public class DeleteCartCommand : ICommand
 {
     public required string Id { get; set; }
 }

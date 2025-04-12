@@ -26,6 +26,8 @@ public static class DependencyInjection
         services.AddSingleton<ICartService, CartService>();
         // add Stripe service
         services.AddScoped<IPaymentService, PaymentService>();
+        // add user service
+        services.AddScoped<IUserService, UserService>();
 
         return services;
     }

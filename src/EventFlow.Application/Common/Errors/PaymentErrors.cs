@@ -1,6 +1,6 @@
 ﻿namespace EventFlow.Application.Common.Errors;
 
-public static class PaymentErrors
+public static class PaymentError
 {
     public static readonly Error CartProblem = new(
         "400",
