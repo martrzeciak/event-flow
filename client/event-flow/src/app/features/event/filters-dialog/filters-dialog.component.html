@@ -1,20 +1,20 @@
 <div class="p-2 text-fuchsia-300">
-    <h3 class="text-3xl font-semibold text-center pt-6 mb-3">Filters</h3>
+    <h3 class="text-3xl font-semibold text-center pt-6 mb-3">Genres</h3>
     <mat-divider></mat-divider>
     <div class="flex p-4">
         <div class="w-full">
-            <h4 class="font-semibold text-xl text-primary">Categories</h4>
             <mat-selection-list [(ngModel)]="selectedCategories" [multiple]="true">
                 <div class="grid grid-cols-2">
                     @for (brand of eventService.categories; track $index) {
-                        <mat-list-option [value]="brand">{{brand}}</mat-list-option>
+                        <mat-list-option [value]="brand">{{ brand }}</mat-list-option>
                     }
                 </div>
             </mat-selection-list>
         </div>
     </div>
+    <mat-divider></mat-divider>
     <div class="flex justify-end p-4">
         <button mat-flat-button (click)="closeDialog()">Close</button>
-        <button mat-flat-button color="primary" class="ml-2" (click)="applyFilters()">Apply Filters</button>
+        <button mat-flat-button color="primary" class="ml-2" (click)="applyFilters()">Apply</button>
     </div>
 </div>

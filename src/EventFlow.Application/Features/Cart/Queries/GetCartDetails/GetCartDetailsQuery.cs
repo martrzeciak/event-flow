@@ -1,6 +1,5 @@
 ﻿using EventFlow.Application.Abstractions.CQRS;
 using EventFlow.Application.DTOs;
-using EventFlow.Domain.Entities;
 
 namespace EventFlow.Application.Features.Cart.Queries.GetCartDetails;
 

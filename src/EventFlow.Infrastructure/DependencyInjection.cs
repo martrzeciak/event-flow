@@ -22,8 +22,10 @@ public static class DependencyInjection
             return ConnectionMultiplexer.Connect(redisConfig);
         });
 
-        // register cart service
+        // add cart service
         services.AddSingleton<ICartService, CartService>();
+        // add Stripe service
+        services.AddScoped<IPaymentService, PaymentService>();
 
         return services;
     }

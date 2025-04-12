@@ -7,6 +7,10 @@
       background-color: #161215,
       text-color: #f4a8ff
     ));
+
+    @include mat.progress-spinner-overrides((
+    active-indicator-color: #161215,
+  ));
 }
 
 .container {

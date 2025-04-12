@@ -1,0 +1,43 @@
+<div class="flex mt-12 gap-6">
+  <div class="w-3/4 text-white">
+    <mat-stepper
+      class="rounded-lg"
+      #stepper
+      (selectionChange)="onStepChange($event)"
+      [linear]="true"
+    >
+      <mat-step [completed]="paymentStatus()">
+        <ng-template matStepLabel>Payment</ng-template>
+        <div id="payment-element"></div>
+        <div class="flex justify-between mt-6">
+          <button routerLink="/" mat-stroked-button>
+            Back to the main page
+          </button>
+          <button [disabled]="!paymentStatus()" matStepperNext mat-flat-button>
+            Next
+          </button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Review</ng-template>
+        <app-checkout-review
+          [confirmationToken]="confirmationToken"
+        ></app-checkout-review>
+        <div class="flex justify-between mt-6">
+          <button matStepperPrevious mat-stroked-button>Back</button>
+          <button (click)="confirmPayment(stepper)" mat-flat-button>
+            @if (loading()) {
+            <mat-spinner diameter="20"></mat-spinner>
+            } @else {
+            <span>Pay {{ cartService.totals()?.total | currency }}</span>
+            }
+          </button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+    <pre>{{ paymentStatus() }}</pre>
+  </div>
+  <div class="w-1/4">
+    <app-order-summary></app-order-summary>
+  </div>
+</div>

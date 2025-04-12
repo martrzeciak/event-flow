@@ -1,0 +1,26 @@
+<div class="mt-4 w-full">
+    <h4 class="text-lg font-semibold">Payment details</h4>
+    <dl>
+        <dd class="mt-1 text-gray-500">{{confirmationToken?.payment_method_preview | paymentCard}}</dd>
+    </dl>
+</div>
+
+<div class="mt-6 mx-auto">
+    <div class="border-b border-gray-200">
+        <table class="w-full text-center">
+            <tbody class="divide-y divide-gray-200">
+                @for (ticket of cartService.cart()?.items; track ticket.ticketId) {
+                    <tr>
+                        <td class="py-4">
+                            <div class="flex items-center gap-4">
+                                <span>{{ ticket.eventName }}</span>
+                            </div>
+                        </td>
+                        <td class="p-4">x{{ ticket.quantity }}</td>
+                        <td class="p-4 text-right">{{ ticket.price | currency }}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
