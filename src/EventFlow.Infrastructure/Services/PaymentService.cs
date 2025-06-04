@@ -1,6 +1,7 @@
 ﻿using EventFlow.Domain.Entities;
 using EventFlow.Domain.Interfaces;
 using EventFlow.Persistence.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Stripe;
 
@@ -21,6 +22,7 @@ public class PaymentService(IConfiguration config, ICartService
         foreach (var item in cart.Items)
         {
             var productItem = context.Ticket.FirstOrDefault(x => x.Id == item.TicketId);
+           
 
             if (productItem is null) return null;
 

@@ -28,6 +28,14 @@ export class EventService {
       params = params.append('search', eventParams.search);
     }
 
+    if (eventParams.dateFrom) {
+        params = params.set('dateFrom', eventParams.dateFrom.toISOString());
+    }
+    
+    if (eventParams.dateTo) {
+        params = params.set('dateTo', eventParams.dateTo.toISOString());
+    }
+
     return getPaginatedResult<EventModel[]>(this.baseUrl + 'events', params, this.http);
   }
 

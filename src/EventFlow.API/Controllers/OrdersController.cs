@@ -10,12 +10,12 @@ namespace EventFlow.API.Controllers;
 public class OrdersController : BaseApiController
 {
     [HttpGet]
-    public async Task<ActionResult<IReadOnlyList<OrderQueryDto>>> GetOrdersForUser(PagingParams pagingParams)
+    public async Task<ActionResult<PagedList<OrderQueryDto>>> GetOrdersForUser([FromQuery]PagingParams pagingParams)
     {
         return HandlePagedResult(await Mediator.Send(new GetOrderListForUserQuery { PagingParams = pagingParams }));
     }
 
-    [HttpGet("{id:guid}")]
+    [HttpGet("{id}")]
     public async Task<ActionResult<OrderQueryDto>> GetOrderDetails(Guid id)
     {
         return HandleResult(await Mediator.Send(new GetOrderDetailsQuery { Id = id }));

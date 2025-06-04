@@ -20,8 +20,7 @@ public class GetEventListQueryHandler(AppDbContext context)
         if (!string.IsNullOrEmpty(request.EventParams.Search))
         {
             query = query.Where(x => x.Name
-                .Contains(request.EventParams.Search, 
-                    StringComparison.CurrentCultureIgnoreCase));
+                .Contains(request.EventParams.Search));
         }
 
         if (!string.IsNullOrEmpty(request.EventParams.Categories))
@@ -32,6 +31,16 @@ public class GetEventListQueryHandler(AppDbContext context)
                 .ToHashSet();
 
             query = query.Where(x => x.Categories.Any(c => categories.Contains(c)));
+        }
+
+        if (request.EventParams.DateFrom.HasValue)
+        {
+            query = query.Where(x => x.Date >= request.EventParams.DateFrom.Value);
+        }
+
+        if (request.EventParams.DateTo.HasValue)
+        {
+            query = query.Where(x => x.Date <= request.EventParams.DateTo.Value.AddDays(1));
         }
 
         query = request.EventParams.OrderBy switch

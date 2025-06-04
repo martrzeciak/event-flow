@@ -21,7 +21,6 @@ public class GetOrderDetailsQueryHandler(AppDbContext context, IUserService user
             return Result.Failure<OrderQueryDto>(UserError.NotLoggedIn);
 
         var query = await context.Orders
-            .AsNoTracking()
             .Where(x => x.BuyerEmail == userEmail)
             .Where(x => x.Id == request.Id)
             .ProjectToType<OrderQueryDto>()

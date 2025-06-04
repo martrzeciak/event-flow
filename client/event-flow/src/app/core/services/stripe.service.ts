@@ -1,11 +1,46 @@
-import { inject, Injectable, signal } from '@angular/core';
-import { ConfirmationToken, loadStripe, Stripe, StripeAddressElement, StripeAddressElementOptions, StripeElements, StripePaymentElement, StripePaymentElementOptions } from '@stripe/stripe-js';
+import { inject, Injectable } from '@angular/core';
+import { Appearance, ConfirmationToken, loadStripe, Stripe, StripeAddressElement, StripeAddressElementOptions, StripeElements, StripePaymentElement, StripePaymentElementOptions } from '@stripe/stripe-js';
 import { HttpClient } from '@angular/common/http';
 import { CartService } from './cart.service';
 import { Cart } from '../../shared/models/cart';
 import { firstValueFrom, map } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
-import { setThrowInvalidWriteToSignalError } from '@angular/core/primitives/signals';
+
+const stripeAppearance: Appearance = {
+  theme: 'night',
+  variables: {
+    colorPrimary: '#a21caf',
+    colorBackground: '#18181b',
+    colorText: '#f3e8ff',
+    colorDanger: '#f472b6',
+    colorSuccess: '#4ade80',
+    colorWarning: '#facc15',
+    borderRadius: '8px',
+    fontFamily: 'Inter, Roboto, Arial, sans-serif',
+    spacingUnit: '6px'
+  },
+  rules: {
+    '.Input, .Block': {
+      backgroundColor: '#18181b',
+      borderColor: '#a21caf',
+      color: '#f3e8ff',
+      boxShadow: 'none'
+    },
+    '.Input:focus, .Block:focus': {
+      borderColor: '#f472b6',
+      boxShadow: '0 0 0 2px #a21caf'
+    },
+    '.Label': {
+      color: '#c4b5fd',
+      fontWeight: '500'
+    },
+    '.Tab, .Tab--selected': {
+      color: '#a21caf'
+    }
+  }
+};
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,7 +67,7 @@ export class StripeService {
       if (stripe) {
         const cart = await firstValueFrom(this.createOrUpdatePaymentIntent());
         this.elements = stripe.elements(
-          {clientSecret: cart.clientSecret, appearance: {labels: 'floating'}, locale: 'en'});
+          {clientSecret: cart.clientSecret, appearance: stripeAppearance, locale: 'en'});
       } else {
         throw new Error('Stripe has not been loaded');
       }
@@ -110,8 +145,6 @@ export class StripeService {
 
     const clientSecret = this.cartService.cart()?.clientSecret;
 
-    console.log(stripe)
-    console.log(this.cartService.cart());
     if (stripe && clientSecret) {
       return await stripe.confirmPayment({
         clientSecret: clientSecret,

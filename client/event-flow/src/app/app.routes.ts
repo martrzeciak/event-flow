@@ -9,15 +9,23 @@ import { TestErrorComponent } from './shared/components/test-error/test-error.co
 import { CartComponent } from './features/cart/cart.component';
 import { CheckoutComponent } from './features/checkout/checkout.component';
 import { CheckoutSuccessComponent } from './features/checkout/checkout-success/checkout-success.component';
+import { OrderComponent } from './features/order/order.component';
+import { OrderDetailedComponent } from './features/order/order-detailed/order-detailed.component';
+import { HomeComponent } from './home/home.component';
+import { UserInfoComponent } from './features/account/user-info/user-info.component';
 
 export const routes: Routes = [
-    {path: '', component: EventComponent},
+    {path: '', component: HomeComponent},
+    {path: 'events', component: EventComponent},
     {path: 'event/:id', component: EventDetailsComponent},
     {path: 'cart', component: CartComponent},
     {path: 'checkout', component: CheckoutComponent},
     {path: 'checkout/success', component: CheckoutSuccessComponent},
+    {path: 'orders', component: OrderComponent},
+    {path: 'orders/:id', component: OrderDetailedComponent},
     {path: 'account/login', component: LoginComponent},
     {path: 'account/register', component: RegisterComponent},
+    {path: 'account/info', component: UserInfoComponent},
     {path: 'test-error', component: TestErrorComponent},
     {path: 'not-found', component: NotFoundComponent},
     {path: 'server-error', component: ServerErrorComponent},

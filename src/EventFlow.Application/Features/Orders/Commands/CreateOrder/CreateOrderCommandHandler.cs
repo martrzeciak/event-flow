@@ -64,6 +64,8 @@ internal class CreateOrderCommandHandler(AppDbContext context,
             BuyerEmail = userEmail
         };
 
+        order.Status = OrderStatus.PaymentReceived;
+
         context.Add(order);
 
         var result = await context.SaveChangesAsync() > 0;

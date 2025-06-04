@@ -5,7 +5,7 @@ import { EventService } from '../../../core/services/event.service';
 import { MatDivider } from '@angular/material/divider';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
-import { MatButton } from '@angular/material/button';
+import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatInput } from '@angular/material/input';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { AddressPipe } from '../../../shared/pipes/address.pipe';
@@ -25,7 +25,8 @@ import { Ticket } from '../../../shared/models/ticket';
     DatePipe,
     AddressPipe,
     CurrencyPipe,
-    FormsModule
+    FormsModule,
+    MatButtonModule
 ],
   templateUrl: './event-details.component.html',
   styleUrl: './event-details.component.scss'

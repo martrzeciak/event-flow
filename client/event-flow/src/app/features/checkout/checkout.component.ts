@@ -11,6 +11,43 @@ import { CurrencyPipe } from '@angular/common';
 import { CheckoutReviewComponent } from "./checkout-review/checkout-review.component";
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { OrderService } from '../../core/services/order.service';
+import { firstValueFrom } from 'rxjs';
+
+const stripeAppearance = {
+  theme: 'night',
+  variables: {
+    colorPrimary: '#a21caf',        // violet-700 (Tailwind)
+    colorBackground: '#18181b',     // neutral-900
+    colorText: '#f3e8ff',           // violet-100
+    colorDanger: '#f472b6',         // fuchsia-400
+    colorSuccess: '#4ade80',        // green-400
+    colorWarning: '#facc15',        // yellow-400
+    borderRadius: '8px',
+    fontFamily: 'Inter, Roboto, Arial, sans-serif',
+    spacingUnit: '6px'
+  },
+  rules: {
+    '.Input, .Block': {
+      backgroundColor: '#18181b',   // neutral-900
+      borderColor: '#a21caf',       // violet-700
+      color: '#f3e8ff',             // violet-100
+      boxShadow: 'none'
+    },
+    '.Input:focus, .Block:focus': {
+      borderColor: '#f472b6',       // fuchsia-400
+      boxShadow: '0 0 0 2px #a21caf'
+    },
+    '.Label': {
+      color: '#c4b5fd',             // violet-300
+      fontWeight: '500'
+    },
+    '.Tab, .Tab--selected': {
+      color: '#a21caf'
+    }
+  }
+};
+
 
 @Component({
   selector: 'app-checkout',
@@ -23,13 +60,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     CurrencyPipe,
     CheckoutReviewComponent,
     MatProgressSpinnerModule
-],
+  ],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.scss'
 })
 export class CheckoutComponent implements OnInit, OnDestroy {
   private stripeService = inject(StripeService);
   private snackbarService = inject(SnackbarService);
+  private orderService = inject(OrderService);
   private router = inject(Router);
   private paymentElement?: StripePaymentElement;
   cartService = inject(CartService);
@@ -37,7 +75,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   paymentStatus = signal<boolean>(false);
   loading = signal<boolean>(false);
   confirmationToken?: ConfirmationToken;
-  
+
+
   async ngOnInit() {
     try {
       this.paymentElement = await this.stripeService.createPaymentElement();
@@ -77,11 +116,21 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     try {
       if (this.confirmationToken) {
         const result = await this.stripeService.confirmPayment(this.confirmationToken);
-        if (result.error) {
+
+        if (result.paymentIntent?.status === 'succeeded') {
+          const order = await this.createOrderModel();
+          const orderResult = await firstValueFrom(this.orderService.createOrder(order));
+          if (orderResult) {
+            this.orderService.orderComplete.set(true);
+            this.cartService.deleteCart();
+            this.router.navigateByUrl('/checkout/success');
+          } else {
+            throw new Error('Order creation failed');
+          }
+        } else if (result.error) {
           throw new Error(result.error.message);
         } else {
-          this.cartService.deleteCart();
-          this.router.navigateByUrl('/checkout/success');
+          throw new Error('Something went wrong');
         }
       }
     } catch (error: any) {
@@ -89,6 +138,26 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       stepper.previous();
     } finally {
       this.loading.set(false);
+    }
+  }
+
+  private async createOrderModel() {
+    const cart = this.cartService.cart();
+    const card = this.confirmationToken?.payment_method_preview.card;
+
+    if (!cart?.id || !card) {
+      throw new Error('Problem creating order');
+    }
+
+    return {
+      cartId: cart.id,
+      paymentSummary: {
+        last4: +card.last4,
+        brand: card.brand,
+        expMonth: card.exp_month,
+        expYear: card.exp_year
+      },
+      discount: this.cartService.totals()?.discount
     }
   }
 

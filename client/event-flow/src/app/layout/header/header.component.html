@@ -5,14 +5,14 @@
     class="flex items-center justify-between max-w-screen-2xl mx-auto"
   >
     <div class="flex gap-3 items-end">
-      <span class="font-extrabold text-2xl tracking-wider">EventFlow</span>
+     <a routerLink="/"><span class="font-extrabold text-2xl tracking-wider">EventFlow</span></a> 
 
       <nav class="flex-grow flex justify-center gap-3 uppercase text-xl font-medium items-center">
         <a
-          routerLink="/"
+          routerLink="/events"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
-          >Concerts</a
+          >Events</a
         >
       </nav>
     </div>
@@ -42,10 +42,17 @@
 
 <mat-menu #menu="matMenu" class="px-6">
 
-  <button mat-menu-item class="px-1" routerLink="/cart">
-      <mat-icon>shopping_cart</mat-icon>
-      My cart
+  <button mat-menu-item class="px-1" routerLink="/account/info">
+      <mat-icon>person</mat-icon>
+    My profile
   </button>
+
+<!-- 
+  <button mat-menu-item routerLink="/account/info">
+  <mat-icon>person</mat-icon>
+  My profile
+</button> -->
+
 
   <button mat-menu-item class="px-1" routerLink="/orders">
       <mat-icon>history</mat-icon>

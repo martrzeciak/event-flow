@@ -11,7 +11,7 @@
       </div>
 
       <div>
-        <h1 class="text-3xl font-bold">{{ event.name }}</h1>
+        <h1 class="text-3xl font-bold mb-3">{{ event.name }}</h1>
 
         <mat-divider></mat-divider>
 
@@ -26,16 +26,15 @@
 
           <div class="flex items-start gap-3 mt-2">
             <button
-              mat-flat-button
+              mat-fab
               (click)="decrementQuantity(ticket.ticketType)"
               [disabled]="selectedTicketQuantities[ticket.ticketType] <= 0"
             >
               <mat-icon>remove_circle</mat-icon>
-              <p>Remove</p>
             </button>
 
             <mat-form-field appearance="outline">
-              <mat-label>Ticket left: {{ ticket.ticketsAvailable }}</mat-label>
+              <mat-label>Tickets left: {{ ticket.ticketsAvailable }}</mat-label>
               <input
                 matInput
                 min="0"
@@ -47,7 +46,7 @@
             </mat-form-field>
 
             <button
-              mat-flat-button
+              mat-fab
               (click)="
                 incrementQuantity(ticket.ticketType, ticket.ticketsAvailable)
               "
@@ -56,12 +55,11 @@
               "
             >
               <mat-icon>add_circle</mat-icon>
-              <p>Add</p>
             </button>
 
             <button
               class="ml-6"
-              mat-flat-button
+              mat-fab
               (click)="
                 updateCart(
                   ticket,
@@ -71,7 +69,7 @@
               "
             >
               <mat-icon>add_shopping_cart</mat-icon>
-              <p>Add to cart</p>
+              <!-- <p>Add to cart</p> -->
             </button>
           </div>
           }
@@ -79,14 +77,14 @@
 
         <mat-divider></mat-divider>
 
-        <div class="my-6">
+        <div class="mt-3 mb-6">
           <p class="text-2xl font-semibold">About</p>
           <p class="mt-2">{{ event.description }}</p>
         </div>
 
         <mat-divider></mat-divider>
 
-        <div class="my-6">
+        <div class="my-3">
           <p class="text-2xl font-semibold">Localization</p>
           <div class="flex flex-col font-normal mt-6">
             <div class="flex items-start mb-3">
@@ -100,7 +98,7 @@
               <mat-icon class="ml-4 mr-1">person</mat-icon>Capacity:
               {{ event.venue.capacity }}
             </div>
-            <div class="flex items-start mb-6">
+            <div class="flex items-start mb-3">
               <mat-icon class="mr-1">map</mat-icon>
               {{ event.venue.address | address }}
             </div>
@@ -109,7 +107,7 @@
 
         <mat-divider></mat-divider>
 
-        <div class="mt-6">
+        <div class="my-3">
           <p class="text-2xl font-semibold">Event organizer</p>
           @for (organizer of event.organizers; track organizer.id) {
           <div class="flex items-start font-normal mt-6">

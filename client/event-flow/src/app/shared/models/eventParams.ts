@@ -4,4 +4,6 @@ export class EventParams {
     orderBy = "date";
     search = '';
     categories: string[] = [];
+    dateFrom?: Date;
+    dateTo?: Date;  
 }

@@ -15,6 +15,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FiltersDialogComponent } from './filters-dialog/filters-dialog.component';
+import { NotFoundComponent } from "../../shared/components/not-found/not-found.component";
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-event',
@@ -29,6 +31,8 @@ import { FiltersDialogComponent } from './filters-dialog/filters-dialog.componen
     MatButton,
     FormsModule,
     MatFormFieldModule,
+    MatDatepickerModule,
+    MatInputModule,
     MatDatepickerModule
   ],
   templateUrl: './event.component.html',
@@ -44,12 +48,12 @@ export class EventComponent implements OnInit {
   pageSizeOptions = [4, 8, 16, 24];
   pagination: Pagination | undefined;
   sortOptions = [
-    {name: 'Date: Newest to Oldest', value: 'date'},
-    {name: 'Date: Oldest to Newest', value: 'dateDesc'},
-    {name: 'Alphabetical', value: 'name'}
+    { name: 'Date: Newest to Oldest', value: 'date' },
+    { name: 'Date: Oldest to Newest', value: 'dateDesc' },
+    { name: 'Alphabetical', value: 'name' }
   ]
   counter: number = 0;
-  
+
   ngOnInit(): void {
     this.initializeEventComponent();
   }
@@ -124,4 +128,10 @@ export class EventComponent implements OnInit {
   resetCounter() {
     this.counter = 0;
   }
+
+  onDateChange() {
+    this.eventParams.pageNumber = 1;
+    this.getEvents();
+  }
+
 }
